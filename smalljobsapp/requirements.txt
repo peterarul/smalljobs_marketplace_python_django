@@ -1,0 +1,13 @@
+defusedxml==0.4.1
+Django==1.9.5
+gunicorn==19.6.0
+oauthlib==1.1.2
+PyJWT==1.4.2
+python-social-auth==0.2.14
+python3-openid==3.0.10
+requests==2.11.0
+requests-oauthlib==0.6.2
+six==1.10.0
+whitenoise==3.2.1
+dj-database-url==0.4.0
+psycopg2=2.6.1

@@ -1,0 +1,18 @@
+body {
+  padding-top: 120px;
+  font-family: "Inconsolata";
+}
+.navbar {
+  background-color: #2C3E50;
+  font-size: 25px;
+}
+.navbar-brand {
+  font-size: 25px;
+}
+#body {
+  background-color: #f7f7f7;
+
+}
+#footer {
+  padding: 20px 0;
+}
