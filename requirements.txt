@@ -1,4 +1,4 @@
-ddefusedxml==0.4.1
+defusedxml==0.4.1
 dj-database-url==0.4.0
 Django==1.9.5
 gunicorn==19.6.0
