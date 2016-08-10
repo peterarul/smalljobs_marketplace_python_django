@@ -139,4 +139,4 @@ SOCIAL_AUTH_FACEBOOK_SECRET = '5f7a759c9c0e87784c88d997b4a2680d'
 # Replce databse setting to use postgresql on Heroku
 import dj_database_url
 db_from_env = dj_database_url.config()
-DATABASE['default'].update(db_from_env)
+DATABASES['default'].update(db_from_env)
