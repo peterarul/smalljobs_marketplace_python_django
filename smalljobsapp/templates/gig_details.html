@@ -1,7 +1,70 @@
 {% extends 'base.html' %}
+{% load staticfiles %}
 
 {% block page %}
-<p>
-  Gig details page
-</p>
+<div class="row">
+  <div class="col-md-8">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h3>I will create an android app for your business</h3>
+        <hr>
+        <img src="{% static 'img/gig.png'%}" class="img-responsive center-block"/>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          <h4>About This GIG</h4>
+      </div>
+      <div class="panel-body">
+        <p>
+          I will create your android app in just 1 week
+        </p>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4>Reviews</h4>
+      </div>
+      <ul class="list-group">
+        {% for i in '123' %}
+        <li class="list-group-item">
+          <div class="row">
+            <div class="col-md-2">
+              <img src="{% static 'img/userplaceholder.jpeg' %}" class="img-circle center-block" height="60" width="60" />
+            </div>
+            <div class="col-md-10">
+              <h5>Prashanth Peter</h5>
+              <p>
+                Neat work !
+              </p>
+              
+            </div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+      
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <button type="button" class="btn btn-success btn-block" name="button">HIRE NOW $10/hr</button>
+      </div>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <img src="{% static 'img/userplaceholder.jpeg' %}" class="img-circle center-block" height="120" width="120" />
+        <h4 class="text-center">Prashanth Simon</h4>
+        <hr/>
+        <p>
+          I have 5 years experience in web development and beyond
+        </p>
+      </div>
+      
+    </div>
+    
+  </div>
+  
+</div>
 {% endblock %}
