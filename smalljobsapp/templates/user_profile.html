@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block page %}
+<!-- 
+  {% if request.user == user_profile.user %}
+    <form method="POST">
+      {% csrf_token %}
+      <div class="jumbotron text-center">
+        <h1><b>{{ user_profile.user.username }}</b></h1>
+        <input class="form-control" name="slogan" value="{{ user_profile.slogan }}">
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <img src="{{ user_profile.avatar }}" class="img-circle" height="120" width="120">
+          <h3 class="text-uppercase"><b>About {{ user_profile.user.username }}</b></h3>
+          <hr/>
+          <input class="form-control" name="about" value="{{ user_profile.about }}">
+          <br/>
+          <button class="btn btn-success" type="submit">Update</button>
+        </div>
+      </div>
+    </form>
+
+  {% else %}
+    <div class="jumbotron text-center">
+      <h1><b>{{ user_profile.user.username }}</b></h1>
+      <p>{{ user_profile.slogan }}</p>
+    </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <img src="{{ user_profile.avatar }}" class="img-circle" height="120" width="120">
+        <h3 class="text-uppercase"><b>About {{ user_profile.user.username }}</b></h3>
+        <hr/>
+        <p>{{ user_profile.about }}</p>
+      </div>
+    </div>
+  {% endif %}
+
+  <h3 class="text-uppercase" style="margin-top:50px"><b>{{ user_profile.user.username }}'s gigs</b></h3>
+  <div class="row">
+    {% for gig in gigs %}
+      <div class="col-md-3">
+        <div class="thumbnail">
+          <a href="{% url 'gig_details' gig.id %}"><img src="/media/{{ gig.photo }}"></a>
+          <div class="caption">
+            <p><a href="{% url 'gig_details' gig.id %}">{{ gig.title }}</a></p>
+            <p>
+              <span>
+                <a href="{% url 'user_profile' gig.user.username %}">{{ gig.user.username }}</a>
+              </span>
+              <b class="green pull-right">{{ gig.price }}$</b>
+          </p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div> -->
+  {% if request.user == user_profile.user %}
+  
+  <form method="POST" name="updated" >
+    {% csrf_token %}
+    <div class="alert alert-info alert-dismissible fade in" role="alert" id="alert">
+      <a href="{% url 'preview_profile' user.username %}" class="btn btn-xs btn-primary pull-left">Preview</a>&nbsp
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      </button>
+      <strong>See!</strong> what your profile page looks like now.
+    </div>
+    <header class="header-image">
+      <div class="headline">
+          <div class="container">
+              <h1>{{ user_profile.user.username }}</h1>
+              <br>
+              <h3>Edit Your Motto</h3>
+              <br>
+                <input class="form-control" name="slogan" value="{{ user_profile.slogan }}">
+                <br>
+                <div class="form-group">
+                  <button class="btn btn-success" type="submit">Update</button>
+              </div>
+          </div>
+        </div>
+    </header>
+    <hr>
+  <div class="featurette form-labels-on-top-about" id="services">
+            <!-- <img class="featurette-image img-circle img-responsive pull-left" src="{{ user_profile.avatar }}"> -->
+            <h2 class="featurette-heading">About {{ user_profile.user.username }}
+                <span class="text-muted">"{{ user_profile.slogan }}"</span>
+            </h2>
+            <br/>
+            <h3>Edit About You</h3>
+            <br>
+            <div class="form-group">
+              <textarea rows="20" cols="80" name="about">{{ user_profile.about }} </textarea>
+              <div class="form-group col-sm-offset-5">
+                <button class="btn btn-success" type="submit">Update</button>
+              </div>
+            </div>
+            <br/>
+        </div>
+    </form>
+        <hr class="featurette-divider">
+    {% else %}
+    <header class="header-image">
+      <div class="headline">
+          <div class="container">
+              <h1>{{ user_profile.user.username }}</h1>
+              <br>
+              <h2>{{ user_profile.slogan }}</h2>
+          </div>
+        </div>
+    </header>  
+  <hr class="featurette-divider">
+  <div class="featurette" id="services">
+            <img class="featurette-image img-circle img-responsive pull-left" src="{{ user_profile.avatar }}">
+            <h2 class="featurette-heading">About {{ user_profile.user.username }}
+                <span class="text-muted">{{ user_profile.slogan }}</span>
+            </h2>
+            <br/>
+            <p>
+              {{ user_profile.about }}
+            </p>
+        </div>
+        <hr class="featurette-divider">
+  {% endif %}
+  <h3 class="text-uppercase" style="margin-top:50px"><b>{{ user_profile.user.username }}'s gigs</b></h3>
+ <div class="row">
+   {% for gig in gigs %}
+     <div class="col-md-3">
+       <div class="thumbnail">
+         <a href="{% url 'gig_details' gig.id %}"><img src="/media/{{ gig.photo }}"></a>
+         <div class="caption">
+           <p><a href="{% url 'gig_details' gig.id %}">{{ gig.title }}</a></p>
+           <p>
+             <span>
+               <a href="{% url 'user_profile' gig.user.username %}">{{ gig.user.username }}</a>
+             </span>
+             <b class="green pull-right">{{ gig.price }}$</b>
+         </p>
+         </div>
+       </div>
+     </div>
+   {% endfor %}
+ </div>
+{% endblock %}

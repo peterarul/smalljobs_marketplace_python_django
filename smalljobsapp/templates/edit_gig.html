@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block page %}
+
+  {% if error %}
+  <div class="alert alert-danger alert-dismissible fade in" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Holy guacamole!</strong> {{ error }}
+  </div>
+  {% endif %}
+  <div class="form-content">
+    <form class="form-labels-on-top" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+            <div class="form-title-row">
+                <h1>Update Gig {{gig.id}}</h1>
+            </div>
+
+            <div class="form-row">
+                <label>
+                    <span>Gig Title</span>
+                    <input type="text" name="title" value="{{gig.title}}">
+                </label>
+            </div>
+            
+            <div class="form-row">
+                <label>
+                    <span>Category</span>
+                    <select name="category">
+                        <option {% if gig.category == "GD" %} selected {% endif %} value="GD">Graphics & Design</option>
+                        <option {% if gig.category == "DM" %} selected {% endif %} value="DM">Digital Marketing</option>
+                        <option {% if gig.category == "VA" %} selected {% endif %} value="VA">Video & Animation</option>
+                        <option {% if gig.category == "MA" %} selected {% endif %} value="MA">Music & Audio</option>
+                        <option {% if gig.category == "PT" %} selected {% endif %} value="PT">Programming & Tech</option>
+                    </select>
+                </label>
+            </div>
+
+
+            <div class="form-row">
+                <label>
+                    <span>Description</span>
+                      <textarea name="description" rows="12" cols="60">{{gig.description}}</textarea>
+                </label>
+            </div>
+            <div class="form-row">
+                <label>
+                    <span>Image</span>
+                    <input type="file" name="photo">
+                    <small>Current Image: {{gig.photo}}</small>
+                </label>
+            </div>
+            <div class="form-row">
+                <label>
+                    <span>Price $ (fixed)</span>
+                    <input type="number" name="price" value="10" readonly>
+                </label>
+            </div>
+            
+            <div class="form-row">
+              <label>
+                  <span>Status</span>
+                  <select name="status">
+                      <option value="1" {% if gig.status %} selected {% endif %}>Active</option>
+                      <option value="" {% if not gig.status %} selected {% endif %}>Disabled</option>
+                  </select>
+              </label>
+            </div>
+
+            <div class="form-row">
+              <div class="col-sm-offset-5">
+                <button class="btn btn-success" type="submit">UPDATE</button>
+              </div>
+            </div>
+
+        </form>
+  </div>
+{% endblock %}

@@ -6,9 +6,9 @@
   <div class="col-md-8">
     <div class="panel panel-default">
       <div class="panel-body">
-        <h3>I will create an android app for your business</h3>
+        <h3>{{gig.title}}</h3>
         <hr>
-        <img src="{% static 'img/gig.png'%}" class="img-responsive center-block"/>
+        <img src="/media/{{gig.photo}}" class="img-responsive center-block"/>
       </div>
     </div>
     <div class="panel panel-default">
@@ -17,7 +17,7 @@
       </div>
       <div class="panel-body">
         <p>
-          I will create your android app in just 1 week
+          {{gig.description}}
         </p>
       </div>
     </div>
@@ -25,19 +25,31 @@
       <div class="panel-heading">
         <h4>Reviews</h4>
       </div>
+      {% if show_post_review %}
+        <div class="panel-body">
+          <form method="POST">
+              {% csrf_token %}
+              <div class="form-group">
+                  <textarea name="content" class="form-control"></textarea>
+              </div>
+              <div class="form-group">
+                <button type="submit" class="btn btn-success">POST</button>
+              </div>
+          </form>
+        </div>
+      {% endif %}
       <ul class="list-group">
-        {% for i in '123' %}
+        {% for r in reviews %}
         <li class="list-group-item">
           <div class="row">
             <div class="col-md-2">
-              <img src="{% static 'img/userplaceholder.jpeg' %}" class="img-circle center-block" height="60" width="60" />
+              <img src="{{ r.user.profile.avatar }}" class="img-circle center-block" height="60" width="60" />
             </div>
             <div class="col-md-10">
-              <h5>Prashanth Peter</h5>
+              <h5>{{ r.user.username }}</h5>
               <p>
-                Neat work !
+                {{ r.review }}
               </p>
-              
             </div>
           </div>
         </li>
@@ -49,17 +61,41 @@
   <div class="col-md-4">
     <div class="panel panel-default">
       <div class="panel-body">
-        <button type="button" class="btn btn-success btn-block" name="button">HIRE NOW $10/hr</button>
+        {% if user and not user.is_anonymous %}
+          <form method="POST" action="/checkouts/">
+            {% csrf_token %}
+            <div id="payment-form"></div>
+            <input name="gig_id" value="{{ gig.id }}" hidden>
+            <button type="submit" class="btn btn-success btn-block btn-raised" name="button">ORDER NOW ${{gig.price}}</button>
+          </form>
+          <script type="text/javascript" src="{% static 'js/jquery.js' %}"> </script>
+          <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+          <script>
+          $(document).ready(function() {
+              braintree.setup("{{ client_token }}", "dropin", {
+                container: "payment-form",
+                paypal: {
+                  singleUse: true,
+                  amount: "{{ gig.price }}",
+                  currency: 'USD'
+                }
+              });
+            });
+
+          </script>
+        {% else %}
+        Login Required
+        {% endif %}
       </div>
     </div>
     <div class="panel panel-default">
       <div class="panel-body">
-        <img src="{% static 'img/userplaceholder.jpeg' %}" class="img-circle center-block" height="120" width="120" />
-        <h4 class="text-center">Prashanth Simon</h4>
+        <img src="{{ gig.user.profile.avatar }}" class="img-circle center-block" height="120" width="120" />
+        <h4 class="text-center"><a href="{% url 'preview_profile' gig.user.username %}">{{gig.user.username}}</a></h4>
         <hr/>
-        <p>
-          I have 5 years experience in web development and beyond
-        </p>
+          <p>
+            {{gig.user.profile.about}}
+          </p>
       </div>
       
     </div>

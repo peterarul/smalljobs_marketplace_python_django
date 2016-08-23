@@ -1,11 +1,12 @@
 body {
-  padding-top: 120px;
   font-family: "Ubuntu", sans-serif;
   background-color: #f7f7f7;
+  padding: 20px;
+  text-align: justify;
 }
 .navbar {
   background-color: #2C3E50;
-  font-size: 25px;
+  
 }
 .navbar-brand {
   font-size: 25px;
@@ -31,3 +32,12 @@ a:hover {
 .green {
   color: #0bb536
 }
+.container {
+  width: auto;
+}
+.aboutjustify{
+  text-align: justify;
+}
+
+
+

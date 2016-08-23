@@ -11,3 +11,4 @@ requests-oauthlib==0.6.2
 six==1.10.0
 whitenoise==3.2.1
 psycopg2==2.6.1
+braintree==3.29.2

@@ -6,17 +6,17 @@
   <div class="col-md-12">
       <img src="{% static 'img/banner.jpg' %}" class="banner" />
   </div>
-  {% for i in '12345678' %}
-    <div class="col-md-3">
+  {% for gig in gigs %}
+    <div class="col-md-4">
       <div class="thumbnail">
-        <a href="{% url 'gig_details' i %}"><img src="{% static 'img/gig.png' %}" /></a>
+        <a href="{% url 'gig_details' gig.id %}"><img style="height: 200px;" src="/media/{{ gig.photo }}" /></a>
           <div class="caption">
             <p>
-              <a href="{% url 'gig_details' i %}">I will create an android app for you</a>
+              <a href="{% url 'gig_details' gig.id %}">{{ gig.title }}</a>
             </p>
             <p>
-              <span>by <a href="#">Prashanth Simon</a></span>
-              <b class="green pull-right">$10/hr</b>
+              <span>by <a href="{% url 'preview_profile' gig.user.username %}">{{gig.user.username}}</a></span>
+              <b class="green pull-right">${{ gig.price }}</b>
             </p>
             
           </div>
@@ -24,5 +24,7 @@
       </div>
     </div>
     {% endfor %}
+    
+    
 </div>
 {% endblock %}

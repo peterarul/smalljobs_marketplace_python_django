@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block page %}
+
+{% if request.user == preview_profile.user %}
+<header class="header-image">
+  <div class="headline">
+      <div class="container">
+          <h1>{{ preview_profile.user.username }}</h1>
+          <br>
+          <h2>{{ preview_profile.slogan }}</h2>
+      </div>
+    </div>
+</header>  
+<hr>
+<div class="featurette" id="services">
+        <div class="col-md-4">
+          <img class="featurette-image img-circle img-responsive pull-left" src="{{ preview_profile.avatar }}">
+        </div>
+        <div class="col-md-8">
+          <h2 class="featurette-heading">About {{ preview_profile.user.username }}
+              <span class="text-muted">{{ preview_profile.slogan }}</span>
+          </h2>
+          <br/>
+          <p style="justify">
+            {{ preview_profile.about }}
+          </p>
+        </div>
+    </div>
+    <hr>
+
+{% endif %}
+
+<h3 class="text-uppercase" style="margin-top:50px"><b>{{ preview_profile.user.username }}'s gigs</b></h3>
+<div class="row">
+ {% for gig in gigs %}
+   <div class="col-md-3">
+     <div class="thumbnail">
+       <a href="{% url 'gig_details' gig.id %}"><img src="/media/{{ gig.photo }}"></a>
+       <div class="caption">
+         <p><a href="{% url 'gig_details' gig.id %}">{{ gig.title }}</a></p>
+         <p>
+           <span>
+             <a href="{% url 'preview_profile' gig.user.username %}">{{ gig.user.username }}</a>
+           </span>
+           <b class="green pull-right">{{ gig.price }}$</b>
+       </p>
+       </div>
+     </div>
+   </div>
+ {% endfor %}
+</div>
+
+{% endblock %}

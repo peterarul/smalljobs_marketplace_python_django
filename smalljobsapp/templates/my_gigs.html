@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block page %}
+  <h1 style="margin-bottom: 30px">My Gigs</h1>
+  <div class="panel panel-default">
+    <table class="table table-bordered table-striped">
+      <thead class="bg-success">
+        <tr>
+          <th>
+            ID
+            <th>Gig Title</th>
+            <th>Category</th>
+            <th>Price ($)</th>
+            <th>Status</th>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for gig in gigs %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td><a type="button" class="btn btn-link" data-toggle="tooltip" data-placement="right" title="Edit" href="{% url 'edit_gig' gig.id %}">{{ gig.title }}</a></td>
+          <td>{% if gig.category == "GD" %}Graphics & Design
+              {% elif gig.category == "DM" %}Digital Marketing
+              {% elif gig.category == "VA" %}Video & Animation
+              {% elif gig.category == "MA" %}Music & Audio
+              {% elif gig.category == "PT" %}Programming & Tech
+              {% endif%}</td>
+          <td>{{ gig.price }}</td>
+          <td>{% if gig.status %} <button type="button" class="btn btn-success">Live</button> {% else %} <button type="button" class="btn btn-warning">Disabled</button> {% endif %}</td>
+          
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}
