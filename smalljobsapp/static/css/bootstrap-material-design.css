@@ -40,6 +40,7 @@ Then, run this script to get the list.
 /* Shadows (from mdl http://www.getmdl.io/) */
 body {
   background-color: #EEEEEE;
+  
 }
 body.inverse {
   background: #333333;
@@ -68,8 +69,9 @@ h6,
 .h2,
 .h3,
 .h4 {
-  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', 'Ubuntu' sans-serif;
   font-weight: 300;
+  
 }
 h5,
 h6 {
@@ -117,7 +119,7 @@ body .container-fluid .jumbotron {
   margin-bottom: 20px;
   -webkit-box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
           box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 2px;
+  border-radius: 0px;
   border: 0;
 }
 body .container .well p,
