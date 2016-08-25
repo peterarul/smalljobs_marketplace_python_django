@@ -124,7 +124,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 #To serve static files on Heroku
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 AUTHENTICATION_BACKENDS = (
     'social.backends.facebook.FacebookOAuth2',
